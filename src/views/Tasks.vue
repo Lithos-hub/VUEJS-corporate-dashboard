@@ -4,11 +4,20 @@
     <SectionBar :image="sectionBar.image" :sectionName="sectionBar.sectionName" />
     <!----------------- -->
 
-    <v-sheet height="100%" width="100%" elevation="15" class="pa-5 blue darken-4" dark rounded="">
-      <!-- ADD DIALOG -->
-      <v-dialog v-model="adddialog" width="800" class="pa-5">
+    <v-sheet
+      height="100%"
+      width="100%"
+      elevation="15"
+      class="pa-5 blue darken-4"
+      dark
+      rounded=""
+    >
+      <!-- ADD TASK DIALOG -->
+      <v-dialog v-model="addDialog" width="800" class="pa-5">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn class="white rounded pa-3 black--text" v-bind="attrs" v-on="on">Add a new task</v-btn>
+          <v-btn class="white rounded pa-3 black--text" v-bind="attrs" v-on="on"
+            >Add a new task</v-btn
+          >
         </template>
 
         <v-card>
@@ -16,17 +25,27 @@
 
           <v-form @submit.prevent="addTask(item)">
             <div class="form-group pa-5">
-              <v-text-field v-model="$v.item.$model" placeholder="Write your task"></v-text-field>
+              <v-text-field
+                v-model="$v.item.$model"
+                placeholder="Write your task"
+              ></v-text-field>
               <small class="red--text" v-if="!$v.item.required">Required field</small>
-              <small class="red--text d-block" v-if="!$v.item.minLength">This must be 5 characters at least</small>
+              <small class="red--text d-block" v-if="!$v.item.minLength"
+                >This must be 5 characters at least</small
+              >
             </div>
 
             <v-divider></v-divider>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn class="mt-5 white--text" color="black" type="submit" :disabled="$v.$invalid || loading" @click="adddialog = false">Add task</v-btn>
-              {{ $v.$invalid }}
+              <v-btn
+                class="mt-5 white--text"
+                color="black"
+                type="submit"
+                @click="addDialog = !addDialog"
+                >Add task</v-btn
+              >
             </v-card-actions>
           </v-form>
         </v-card>
@@ -37,7 +56,14 @@
       <!-- SEARCH BAR SYSTEM -->
 
       <form @submit.prevent="searchBar(searchinput)">
-        <input type="text" placeholder="Search tasks" class="form-control border-info mt-5" v-model="searchinput" id="searchbar" v-on:keyup="searchBar(searchinput)" />
+        <input
+          type="text"
+          placeholder="Search tasks"
+          class="form-control border-info mt-5"
+          v-model="searchinput"
+          id="searchbar"
+          v-on:keyup="searchBar(searchinput)"
+        />
       </form>
 
       <!-- EEND SEARCH BAR SYSTEM -->
@@ -57,56 +83,76 @@
       <!-- END LOADER SPINNER -->
 
       <v-list rounded class="transparent">
-        <v-list-item id="taskList" v-if="!loading">
-          <v-list-item-content v-for="item of filteredArray" :key="item.id">
-            <v-list-item-title id="task-title">
-              {{ item.item }}
-            </v-list-item-title>
+        <div v-if="!loading">
+          <v-list-item id="taskList" v-for="item of filteredArray" :key="item.id">
+            <v-list-item-content>
+              <v-list-item-title id="task-title">
+                {{ item.item }}
+              </v-list-item-title>
 
-            <small class="font-weight-thin pa-5">Task ID: {{ item.id }}</small>
-          </v-list-item-content>
+              <small class="font-weight-thin pa-5">Task ID: {{ item.id }}</small>
+            </v-list-item-content>
 
-          <!-- <router-link :to="{ name: 'Edit', params: { id: item.id } }">
+            <!-- <router-link :to="{ name: 'Edit', params: { id: item.id } }">
             <v-btn large class="green rounded mr-5">Edit</v-btn>
           </router-link> -->
 
-          <!-- EDIT DIALOG -->
-          <v-dialog v-model="editdialog" max-width="800">
-            <v-card>
-              <v-card-title class="headline orange white--text">Edit task </v-card-title>
-              <div class="row pa-5">
-                <div class="col">
-                  <h3 class="text-white">Task Name:</h3>
-                  <p class="lead">{{ task.item }}</p>
-                </div>
-                <div class="col">
-                  <h3 class="text-white">Task ID:</h3>
-                  <p class="lead">{{ task.id }}</p>
-                </div>
-              </div>
-
-              <v-form @submit.prevent="editTask(task)">
-                <div class="pa-5">
-                  <v-text-field v-model="$v.task.item.$model" placeholder="Edit your task"></v-text-field>
-                  <small class="red--text" v-if="!$v.item.required">Required field</small>
-                  <small class="red--text d-block" v-if="!$v.item.minLength">This must be 5 characters at least</small>
+            <!-- EDIT DIALOG -->
+            <v-dialog v-model="editdialog" max-width="800">
+              <v-card>
+                <v-card-title class="headline orange white--text"
+                  >Edit task
+                </v-card-title>
+                <div class="row pa-5">
+                  <div class="col">
+                    <h3 class="text-white">Task Name:</h3>
+                    <p class="lead">{{ task.item }}</p>
+                  </div>
+                  <div class="col">
+                    <h3 class="text-white">Task ID:</h3>
+                    <p class="lead">{{ task.id }}</p>
+                  </div>
                 </div>
 
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn class="orange white--text" type="submit" id="saveBtn" :disabled="$v.task.$invalid" @click="editdialog = false">Save changes</v-btn>
-                </v-card-actions>
-              </v-form>
-            </v-card>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn large class="orange rounded mr-5" v-bind="attrs" v-on="on">Edit</v-btn>
-            </template>
+                <v-form @submit.prevent="editTask(task)">
+                  <div class="pa-5">
+                    <v-text-field
+                      v-model="$v.task.item.$model"
+                      placeholder="Edit your task"
+                    ></v-text-field>
+                    <small class="red--text" v-if="!$v.item.required"
+                      >Required field</small
+                    >
+                    <small class="red--text d-block" v-if="!$v.item.minLength"
+                      >This must be 5 characters at least</small
+                    >
+                  </div>
 
-            <!-- END EDIT DIALOG -->
-          </v-dialog>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      class="orange white--text"
+                      type="submit"
+                      id="saveBtn"
+                      :disabled="$v.task.$invalid"
+                      @click="editdialog = false"
+                      >Save changes</v-btn
+                    >
+                  </v-card-actions>
+                </v-form>
+              </v-card>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn large class="orange rounded mr-5" v-bind="attrs" v-on="on"
+                  >Edit</v-btn
+                >
+              </template>
 
-          <v-btn large class="error rounded" @click="removeTask(item.id)">Remove</v-btn>
-        </v-list-item>
+              <!-- END EDIT DIALOG -->
+            </v-dialog>
+
+            <v-btn large class="error rounded" @click="removeTask(item.id)">Remove</v-btn>
+          </v-list-item>
+        </div>
       </v-list>
     </v-sheet>
   </div>
@@ -126,7 +172,7 @@ export default {
   },
   data() {
     return {
-      adddialog: false,
+      addDialog: false,
       editdialog: false,
       item: "",
       searchinput: "",
@@ -137,7 +183,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getTasks", "removeTask", "searchBar", "addTask", "getTask", "editTask"]),
+    ...mapActions([
+      "getTasks",
+      "removeTask",
+      "searchBar",
+      "addTask",
+      "getTask",
+      "editTask",
+    ]),
   },
   validations: {
     task: {
@@ -151,7 +204,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["tasks", "loading", "task"]),
+    ...mapState(["tasks", "loading", "task", "addDialog"]),
     ...mapGetters(["filteredArray"]),
   },
   created() {

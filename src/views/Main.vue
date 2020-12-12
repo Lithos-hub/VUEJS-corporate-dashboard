@@ -4,12 +4,14 @@
     <SectionBar :image="sectionBar.image" :sectionName="sectionBar.sectionName" />
     <!----------------- -->
     <v-sheet height="100%" width="100%" elevation="15" class="pa-5">
-      <h1 id="hello-user">Hi {{ randomUser.name.first }}! today is {{ new Date() | moment("dddd Do") }}</h1>
+      <h1 id="hello-user">
+        Hi {{ randomUser.name.first }}! today is {{ new Date() | moment("dddd Do") }}
+      </h1>
 
       <v-divider></v-divider>
 
       <v-row>
-        <v-col cols="8">
+        <v-col id="left-col">
           <v-card class="mx-auto my-5" width="100%" color="primary" dark>
             <v-card-title>
               <v-icon large left> mdi-pencil </v-icon>
@@ -43,10 +45,14 @@
           <v-card class="mx-auto" width="100%" color="error" dark id="new-hire">
             <v-card-title>
               <v-icon large left id="hire-star"> mdi-star </v-icon>
-              <span class="title font-weight-light">New hire! Say hello to John Doe </span>
+              <span class="title font-weight-light"
+                >New hire! Say hello to John Doe
+              </span>
             </v-card-title>
 
-            <v-card-text class="headline font-weight-bold"> Hi! I'm John! I love music, videogames... and coding, of course! </v-card-text>
+            <v-card-text class="headline font-weight-bold">
+              Hi! I'm John! I love music, videogames... and coding, of course!
+            </v-card-text>
 
             <v-card-actions>
               <v-list-item class="grow">
@@ -72,11 +78,18 @@
 
         <!-- RIGHT CALENDAR ******************************** -->
 
-        <v-col cols="4">
+        <v-col id="right-col">
           <v-sheet width="100%" height="100%" elevation="15" class="pa-5">
             <v-row class="fill-height">
               <v-col>
-                <v-sheet height="64" width="100%" color="teal" class="text-center pa-5 mb-5" dark rounded>
+                <v-sheet
+                  height="64"
+                  width="100%"
+                  color="teal"
+                  class="text-center pa-5 mb-5"
+                  dark
+                  rounded
+                >
                   <v-toolbar-title v-if="$refs.calendar">
                     {{ new Date() | moment("MMMM YYYY") }}
                   </v-toolbar-title>
@@ -84,7 +97,16 @@
                 </v-sheet>
 
                 <v-sheet height="600">
-                  <v-calendar ref="calendar" v-model="focus" color="primary" :events="events" :event-color="getEventColor" :weekdays="weekday" :type="type" @change="updateRange"></v-calendar>
+                  <v-calendar
+                    ref="calendar"
+                    v-model="focus"
+                    color="primary"
+                    :events="events"
+                    :event-color="getEventColor"
+                    :weekdays="weekday"
+                    :type="type"
+                    @change="updateRange"
+                  ></v-calendar>
                 </v-sheet>
               </v-col>
             </v-row>
@@ -199,25 +221,68 @@ export default {
 <style lang="scss">
 @import "src/scss/variables";
 
-#new-hire {
-  position: relative;
-  top: 140px;
+// ******* MOBILE RESPONSIVE ******* //
+@media only screen and (min-width: 360px) {
+}
+// ******* LAPTOP RESPONSIVE ******* //
+@media only screen and (min-width: 767px) {
+  #left-col {
+    width: 100%;
+  }
+  #right-col {
+    max-width: 800px;
+  }
+  #new-hire {
+    position: relative;
+    top: 0px;
+  }
+
+  #hello-user {
+    font-family: $style3;
+    color: rgb(51, 144, 214);
+    margin-bottom: 0px;
+  }
+
+  #hire-star {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 }
 
-#hello-user {
-  font-family: $style3;
-  color: rgb(51, 144, 214);
-  margin-bottom: 20px;
-}
+// ******* DESKTOP RESPONSIVE ******* //
+@media only screen and (min-width: 1370px) {
+  #left-col {
+    width: 100%;
+  }
+  #right-col {
+    max-width: 600px;
+  }
+  #new-hire {
+    position: relative;
+    top: 140px;
+  }
 
-#hire-star {
-  animation: spin 4s linear infinite;
-}
+  #hello-user {
+    font-family: $style3;
+    color: rgb(51, 144, 214);
+    margin-bottom: 20px;
+  }
 
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+  #hire-star {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
 }
 </style>

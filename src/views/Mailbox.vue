@@ -5,9 +5,15 @@
     <!----------------- -->
 
     <v-row>
-      <v-col cols="2">
-        <v-card class="mx-auto" height="100%" width="300">
-          <v-navigation-drawer absolute dark src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg" width="100%" permanent>
+      <v-col id="left-col">
+        <v-card class="mx-auto" height="100%" width="100%">
+          <v-navigation-drawer
+            absolute
+            dark
+            src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
+            width="100%"
+            permanent
+          >
             <v-list>
               <v-list-item v-for="([icon, text], i) in items" :key="i" link>
                 <v-list-item-icon>
@@ -38,9 +44,14 @@
         </v-card>
       </v-col>
 
-      <v-col cols="10">
+      <v-col id="right-col">
         <v-sheet height="100%" width="100%" elevation="15" class="py-5" color="primary">
-          <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" max-height="100%" width="100%">
+          <v-sheet
+            id="scrolling-techniques-3"
+            class="overflow-y-auto"
+            max-height="100%"
+            width="100%"
+          >
             <v-container>
               <v-layout id="main-contain">
                 <v-row>
@@ -95,17 +106,53 @@ export default {
 };
 </script>
 
-<style>
-#main-contain {
-  bottom: 0px;
-  margin: 50px;
+<style lang="scss">
+// ******* MOBILE RESPONSIVE ******* //
+@media only screen and (min-width: 360px) {
+}
+// ******* LAPTOP RESPONSIVE ******* //
+@media only screen and (min-width: 767px) {
+  #left-col {
+    max-width: 300px !important;
+  }
+
+  #right-col {
+    max-width: 100%;
+  }
+  #main-contain {
+    bottom: 0px;
+    margin: 50px;
+  }
+
+  #spacer {
+    padding-bottom: 500px;
+  }
+
+  #mailboxMenu {
+    height: 1000px;
+  }
 }
 
-#spacer {
-  padding-bottom: 500px;
-}
+// ******* DESKTOP RESPONSIVE ******* //
+@media only screen and (min-width: 1370px) {
+  #left-col {
+    max-width: 250px !important;
+  }
 
-#mailboxMenu {
-  height: 1000px;
+  #right-col {
+    max-width: 100%;
+  }
+  #main-contain {
+    bottom: 0px;
+    margin: 50px;
+  }
+
+  #spacer {
+    padding-bottom: 500px;
+  }
+
+  #mailboxMenu {
+    height: 1000px;
+  }
 }
 </style>

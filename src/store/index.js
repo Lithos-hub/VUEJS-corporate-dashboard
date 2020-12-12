@@ -98,6 +98,7 @@ export default new Vuex.Store({
      })
      .then(doc => {
        commit('loadFirebase', false);
+       dispatch('getTasks')
      })
    },
    removeTask({commit, dispatch}, taskId){

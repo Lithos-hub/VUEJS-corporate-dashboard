@@ -14,7 +14,9 @@
 
       <v-spacer></v-spacer>
 
-      <span id="clock" class="mr-5 cyan--text">{{ new Date() | moment("D/M/YYYY") }}</span>
+      <span id="clock" class="mr-5 cyan--text">{{
+        new Date() | moment("D/M/YYYY")
+      }}</span>
       <span id="clock" class="mr-5 white--text">{{ this.now.format("HH:mm:ss") }}</span>
 
       <!-- // NOTIFICATIONS DIALOG // -->
@@ -29,13 +31,23 @@
             </v-btn>
           </template>
 
-          <v-subheader class="white--text primary font-weight-bold">Notifications</v-subheader>
+          <v-subheader class="white--text primary font-weight-bold"
+            >Notifications</v-subheader
+          >
 
           <v-list three-line>
             <template v-for="(item, index) in itemsDialog">
-              <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
+              <v-subheader
+                v-if="item.header"
+                :key="item.header"
+                v-text="item.header"
+              ></v-subheader>
 
-              <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
+              <v-divider
+                v-else-if="item.divider"
+                :key="index"
+                :inset="item.inset"
+              ></v-divider>
 
               <v-list-item v-else :key="item.title">
                 <v-list-item-avatar>
@@ -73,13 +85,15 @@
     <v-navigation-drawer v-model="drawer" dark src="../assets/img/img-ve1.jpg" app>
       <v-layout column align-center class="mt-5">
         <v-flex>
-          <v-avatar height="100px" width="100px">
+          <v-avatar height="100px" width="100px" id="avatar">
             <img :src="randomUser.picture.medium" />
           </v-avatar>
         </v-flex>
 
         <v-flex>
-          <h3 class="cyan--text mt-5 text-center">@{{ randomUser.name.first }}_{{ randomUser.name.last }}</h3>
+          <h3 class="cyan--text mt-5 text-center" id="user-nick">
+            @{{ randomUser.name.first }}_{{ randomUser.name.last }}
+          </h3>
           <v-list-item to="/account" active-class="cyan--text">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
@@ -91,18 +105,29 @@
         </v-flex>
       </v-layout>
 
-      <v-divider></v-divider>
-
       <!-- SIDE MENU -->
-      <v-list-item v-for="(item, index) in itemsMenu" :key="index" link :to="item.to" active-class="white--text">
+      <v-list-item
+        v-for="(item, index) in itemsMenu"
+        :key="index"
+        link
+        :to="item.to"
+        active-class="white--text"
+      >
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon id="side-icon">{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title>{{ item.text }}</v-list-item-title>
+          <v-list-item-title id="side-text">{{ item.text }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
+      <!-- VERSION -->
+
+      <div id="version-count">
+        <v-divider></v-divider>
+        <p class="mt-5 ml-5 white--text">Version: {{ version }}.{{ subversion }}</p>
+      </div>
     </v-navigation-drawer>
   </div>
 </template>
@@ -117,6 +142,8 @@ export default {
 
   data() {
     return {
+      version: 1,
+      subversion: 1,
       now: moment(),
       sheet: false,
       tiles: [
@@ -201,19 +228,24 @@ export default {
         {
           avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
           title: "The services are again operational. Check your inbox!",
-          subtitle: '<span class="text--primary">Sandra Alonso</span> &mdash; DevOps Engineer',
+          subtitle:
+            '<span class="text--primary">Sandra Alonso</span> &mdash; DevOps Engineer',
         },
         { divider: true, inset: true },
         {
           avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          title: "Julián says that we could go to the event at the IFEMA on Friday afternoon. Does that sound good?",
-          subtitle: '<span class="text--primary">Sara Martín</span> &mdash; Front-end developer',
+          title:
+            "Julián says that we could go to the event at the IFEMA on Friday afternoon. Does that sound good?",
+          subtitle:
+            '<span class="text--primary">Sara Martín</span> &mdash; Front-end developer',
         },
         { divider: true, inset: true },
         {
           avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-          title: "Please send me the GitHub projects as soon as you can, I need to check a few things.",
-          subtitle: '<span class="text--primary">Marina García</span> &mdash; Front-end developer',
+          title:
+            "Please send me the GitHub projects as soon as you can, I need to check a few things.",
+          subtitle:
+            '<span class="text--primary">Marina García</span> &mdash; Front-end developer',
         },
       ],
     };
@@ -241,8 +273,62 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 body {
   background-color: transparent;
+}
+
+// ******* MOBILE RESPONSIVE ******* //
+@media only screen and (min-width: 360px) {
+}
+// ******* LAPTOP RESPONSIVE ******* //
+@media only screen and (min-width: 767px) {
+  #avatar {
+    width: 90% !important;
+    height: 90% !important;
+  }
+
+  #user-nick {
+    font-size: 15px;
+  }
+
+  #version-count {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    font-weight: 100;
+  }
+  #side-icon {
+    font-size: 15px;
+  }
+  #side-text {
+    font-size: 12px;
+  }
+}
+
+// ******* DESKTOP RESPONSIVE ******* //
+@media only screen and (min-width: 1370px) {
+  #avatar {
+    width: 120% !important;
+    height: 120% !important;
+  }
+
+  #user-nick {
+    font-size: 20px;
+  }
+  #version-count {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    font-weight: 100;
+  }
+  #side-icon {
+    font-size: 20px;
+  }
+  #side-text {
+    font-size: 20px;
+  }
 }
 </style>

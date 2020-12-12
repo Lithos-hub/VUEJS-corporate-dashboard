@@ -19,6 +19,15 @@
           <li>In the future, I will expand the posibilities of this app with new functionalities and bug fixes.</li>
         </ul>
       </p>
+
+      <h3 class="mb-5">Change log:</h3>
+      <v-card color="green pa-3" dark>
+      <ul style="list-style: none;">
+        <li>Added dynamic modals in Team section <span style="color: black; float: right">December 12, 2020</span></li>
+        <hr>
+      </ul>
+      </v-card>
+      
     </v-sheet>
   </div>
 </template>
@@ -44,6 +53,10 @@ export default {
 
 <style>
 #about-text {
-  font-size: 24px;
+  font-size: 18px;
+}
+
+#changelog-list {
+  color: green !important;
 }
 </style>
