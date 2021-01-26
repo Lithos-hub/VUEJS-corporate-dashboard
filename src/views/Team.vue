@@ -113,39 +113,61 @@
       <v-dialog
         v-model="dialog"
         persistent
-        max-width="500px"
+        max-width="70%"
         max-height="800"
         v-if="dialog"
+        overlay-opacity="1"
       >
         <v-card>
-          <v-card-title>
-            <span class="headline">{{ employeeName }}</span>
+          <v-card-title class="blue white--text">
+            <span class="employee-name">{{ employeeName }}</span
+            ><span class="employee-position">{{ employeePosition }}</span>
           </v-card-title>
           <v-card-text>
             <v-container>
-              <v-sheet height="100%" width="100%" elevation="10" class="pa-5">
-                <v-row>
-                  <h2 class="blue--text text-center my-5">Company information:</h2>
-                  <v-list>
-                    <v-list-item>Employee ID: {{ employeeID }} </v-list-item>
-                    <v-list-item>Position: {{ employeePosition }} </v-list-item>
-                    <v-list-item>City: {{ employeeCity }}</v-list-item>
-                    <v-list-item>Country: {{ employeeCountry }} </v-list-item>
-                    <v-list-item>Corporate email: {{ employeeMail }} </v-list-item>
-                    <v-list-item-icon link>
-                      <v-icon color="green" id="mail-user-dialog">mdi-message</v-icon>
-                      <v-list-item-content class="ml-5"
-                        >Send a message</v-list-item-content
-                      >
-                    </v-list-item-icon>
-                  </v-list>
+              <v-sheet height="100%" width="100%" elevation="10" class="pa-10">
+                <v-row no-gutters>
+                  <v-col cols="2" class="ma-auto">
+                    <v-card elevation="10" id="img-user-dialog">
+                      <v-img :src="employeeImg" aspect-ratio="1"></v-img>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="2"></v-col>
+                  <v-col class="text-left ma-auto">
+                    <v-row>
+                      <h2 class="blue--text my-5 d-block">Company information:</h2>
+                    </v-row>
+                    <v-row>
+                      <v-list class="d-block">
+                        <v-list-item>Employee ID: {{ employeeID }} </v-list-item>
+                        <v-list-item>Position: {{ employeePosition }} </v-list-item>
+                        <v-list-item>City: {{ employeeCity }}</v-list-item>
+                        <v-list-item>Country: {{ employeeCountry }} </v-list-item>
+                        <v-list-item>Corporate email: {{ employeeMail }} </v-list-item>
+                        <v-list-item-icon link>
+                          <v-icon color="green" id="mail-user-dialog">mdi-message</v-icon>
+                          <v-list-item-content class="ml-5"
+                            >Send a message</v-list-item-content
+                          >
+                        </v-list-item-icon>
+                      </v-list>
+                      <v-col cols="2"></v-col>
+                    </v-row>
+                  </v-col>
                 </v-row>
               </v-sheet>
             </v-container>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
+            <v-btn
+              color="blue darken-3"
+              class="white--text"
+              block
+              @click="dialog = false"
+            >
+              Close
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -171,6 +193,7 @@ export default {
       employeeCity: "",
       employeeCountry: "",
       employeeMail: "",
+      employeeImg: "",
       dialog: false,
       selectItems: [
         "Names asc.",
@@ -305,12 +328,34 @@ export default {
       this.employeeCity = item.city;
       this.employeeCountry = item.country;
       this.employeeMail = item.mail;
+      this.employeeImg = item.img;
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "src/scss/variables";
+
+.employee-name {
+  font-size: 40px;
+  letter-spacing: 5px;
+  font-family: $style1;
+}
+
+#img-user-dialog {
+  width: 200px;
+
+  border-radius: 10px;
+}
+
+.employee-position {
+  position: absolute;
+  right: 20px;
+  font-size: 2em;
+  color: rgb(34, 34, 34);
+}
+
 // ******* MOBILE RESPONSIVE ******* //
 @media only screen and (min-width: 360px) {
 }

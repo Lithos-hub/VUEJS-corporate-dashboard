@@ -2,10 +2,10 @@
   <div>
     <!-- // SUPERIOR NAVBAR // -->
 
-    <v-app-bar app color="dark" dark id="navbar">
+    <v-app-bar app dark src="../assets/img/navbar.jpg" id="navbar">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center">
-        <v-toolbar-title>Dashboard</v-toolbar-title>
+        <v-toolbar-title>iDash</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
@@ -82,7 +82,7 @@
 
     <!-- // END SUPERIOR NAVBAR // -->
 
-    <v-navigation-drawer v-model="drawer" dark src="../assets/img/img-ve1.jpg" app>
+    <v-navigation-drawer v-model="drawer" dark src="../assets/img/sidebar.jpg" app>
       <v-layout column align-center class="mt-5">
         <v-flex>
           <v-avatar height="100px" width="100px" id="avatar">
@@ -126,7 +126,20 @@
 
       <div id="version-count">
         <v-divider></v-divider>
-        <p class="mt-5 ml-5 white--text">Version: {{ version }}.{{ subversion }}</p>
+        <p class="pt-5 ml-5 white--text mx-auto">
+          Version: {{ major }}.{{ minor }}.{{patch}}
+          <a
+            href="https://github.com/Lithos-hub/VUEJS-corporate-dashboard"
+            style="text-decoration: none"
+          >
+            <v-btn icon class="mr-5 mb-3 m-auto float-right">
+              <v-icon>mdi-github</v-icon>
+            </v-btn>
+          </a>
+        </p>
+        <router-link to="/changelog" style="text-decoration: none;">
+        <v-btn width="100%" tile color="red darken-2">Changelog</v-btn>
+        </router-link>
       </div>
     </v-navigation-drawer>
   </div>
@@ -142,8 +155,9 @@ export default {
 
   data() {
     return {
-      version: 1,
-      subversion: 1,
+      major: 1,
+      minor: 1,
+      patch: 2,
       now: moment(),
       sheet: false,
       tiles: [

@@ -13,7 +13,8 @@ export default new Vuex.Store({
     task: {item: '', id: ''},
     loadingTasks: false,
     searchtext: '',
-    loading: false,
+    loadingFirebase: false,
+    loadingUserData: false,
     loadingError: "",
     randomUser: {},
     multipleUsers: {},
@@ -30,8 +31,11 @@ export default new Vuex.Store({
       const filteredTasks = state.tasks.filter(item => item.id !== payload)
       state.tasks = filteredTasks
     },
-    loadFirebase(state, payload){
-      state.loading = payload
+    loadingFirebase(state, payload){
+      state.loadingFirebase = payload
+    },
+    loadingUserData(state, payload){
+      state.loadingUserData = payload
     },
     setRandomUser(state, payload) {
       state.randomUser = payload;
@@ -51,7 +55,7 @@ export default new Vuex.Store({
     },
     getTasks({commit}){
 
-      commit('loadFirebase', true)
+      commit('loadingFirebase', true)
 
 
         const tasks = [];
@@ -66,7 +70,7 @@ export default new Vuex.Store({
             tasks.push(task)
 
             setTimeout(() => {
-              commit('loadFirebase', false)
+              commit('loadingFirebase', false)
             },)
           })
           commit('setTasks', tasks);
@@ -84,7 +88,7 @@ export default new Vuex.Store({
   },
   editTask({commit}, task){
   db.collection('dashboard-task-list').doc(task.id).update({
-      item: task.item
+      item: taskName
       })
     .then(() => {
   console.log("Tarea editada")
@@ -92,12 +96,12 @@ export default new Vuex.Store({
     })
    },
    addTask({commit}, taskName){
-     commit('loadFirebase', true);
+     commit('loadingFirebase', true);
      db.collection("dashboard-task-list").add({
        item: taskName
      })
      .then(doc => {
-       commit('loadFirebase', false);
+       commit('loadingFirebase', false);
        dispatch('getTasks')
      })
    },
@@ -112,11 +116,11 @@ export default new Vuex.Store({
     getRandomUser({commit}) {
 
       return new Promise((resolve) => {
-        
+        commit('loadingUserData', true);
         const data = axios
         .get("https://randomuser.me/api/")
         .then((resp) => {
-
+          commit('loadingUserData', false);
             commit("setRandomUser", resp.data.results[0])
           
           
@@ -132,11 +136,11 @@ export default new Vuex.Store({
 
      
       return new Promise((resolve) => {
-        
+        commit('loadingUserData', true);
         const data = axios
         .get("https://randomuser.me/api/?results=100")
         .then((resp) => {
-
+          commit('loadingUserData', false);
           
             commit("setMultipleUsers", resp.data.results)
             console.log("From vuex")

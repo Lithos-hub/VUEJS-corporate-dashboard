@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Section Bar -->
-    <SectionBar :image="sectionBar.image" :sectionName="sectionBar.sectionName" />
+    <SectionBar :image="sectionBar.image" :sectionName="sectionBar.sectionName"/>
     <!----------------- -->
 
     <v-sheet height="100%" width="100%" elevation="15" class="pa-5">
@@ -19,14 +19,6 @@
           <li>In the future, I will expand the posibilities of this app with new functionalities and bug fixes.</li>
         </ul>
       </p>
-
-      <h3 class="mb-5">Change log:</h3>
-      <v-card color="green pa-3" dark>
-      <ul style="list-style: none;">
-        <li>Added dynamic modals in Team section <span style="color: black; float: right">December 12, 2020</span></li>
-        <hr>
-      </ul>
-      </v-card>
       
     </v-sheet>
   </div>
@@ -43,7 +35,7 @@ export default {
   data() {
     return {
       sectionBar: {
-        image: require("../assets/img/imgbar1.jpg"),
+        image: require("../assets/img/idash-bar.jpg"),
         sectionName: "About",
       },
     };
@@ -56,7 +48,4 @@ export default {
   font-size: 18px;
 }
 
-#changelog-list {
-  color: green !important;
-}
 </style>

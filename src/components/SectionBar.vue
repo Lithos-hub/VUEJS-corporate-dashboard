@@ -4,16 +4,13 @@
       <v-flex>
         <v-toolbar
           dark
-          prominent
           v-bind:src="image"
           width="100%"
           elevation="10"
           class="rounded"
           id="sectionBar"
         >
-          <v-toolbar-title class="text-h1" id="sectionTitle">{{
-            sectionName
-          }}</v-toolbar-title>
+          <v-toolbar-title id="sectionTitle">{{ sectionName }}</v-toolbar-title>
         </v-toolbar>
       </v-flex>
     </v-layout>
@@ -36,24 +33,34 @@ export default {
 // ******* LAPTOP RESPONSIVE ******* //
 @media only screen and (min-width: 767px) {
   #sectionTitle {
+    position: absolute;
+    top: 0px;
     font-family: $style1 !important;
-    font-size: 5em !important;
-    margin-bottom: 20px;
+    font-size: 3em !important;
+    text-shadow: none;
+    text-transform: uppercase;
   }
   #sectionBar {
-    max-height: 75%;
+    position: relative;
+    height: 100px;
+    margin-bottom: 20px;
   }
 }
 
 // ******* DESKTOP RESPONSIVE ******* //
 @media only screen and (min-width: 1370px) {
   #sectionTitle {
+    position: absolute;
+    top: 0px;
     font-family: $style1 !important;
-    font-size: 8em !important;
-    margin-bottom: 0px;
+    font-size: 3em !important;
+    text-shadow: none;
+    text-transform: uppercase;
   }
   #sectionBar {
-    max-height: 100%;
+    position: relative;
+    height: 100px;
+    margin-bottom: 20px;
   }
 }
 </style>

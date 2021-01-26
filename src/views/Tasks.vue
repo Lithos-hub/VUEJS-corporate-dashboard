@@ -73,7 +73,7 @@
 
       <!-- LOADER SPINNER -->
 
-      <div class="container text-center mt-5" v-if="loading">
+      <div class="container text-center mt-5" v-if="loadingFirebase">
         <h4 class="display-1 error white--text rounded pa-5">
           Loading data...
           <dot-loader :loading="loading"></dot-loader>
@@ -93,10 +93,6 @@
               <small class="font-weight-thin pa-5">Task ID: {{ item.id }}</small>
             </v-list-item-content>
 
-            <!-- <router-link :to="{ name: 'Edit', params: { id: item.id } }">
-            <v-btn large class="green rounded mr-5">Edit</v-btn>
-          </router-link> -->
-
             <!-- EDIT DIALOG -->
             <v-dialog v-model="editdialog" max-width="800">
               <v-card>
@@ -106,7 +102,7 @@
                 <div class="row pa-5">
                   <div class="col">
                     <h3 class="text-white">Task Name:</h3>
-                    <p class="lead">{{ task.item }}</p>
+                    <p class="lead">{{ tasks.item }}</p>
                   </div>
                   <div class="col">
                     <h3 class="text-white">Task ID:</h3>
@@ -135,7 +131,8 @@
                       type="submit"
                       id="saveBtn"
                       :disabled="$v.task.$invalid"
-                      @click="editdialog = false"
+                      @v-on:click="editdialog = false"
+                      @click="editTask"
                       >Save changes</v-btn
                     >
                   </v-card-actions>
@@ -204,7 +201,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["tasks", "loading", "task", "addDialog"]),
+    ...mapState(["tasks", "loadingFirebase", "task", "addDialog"]),
     ...mapGetters(["filteredArray"]),
   },
   created() {

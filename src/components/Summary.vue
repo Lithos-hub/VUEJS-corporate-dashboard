@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="container">
-      <div v-if="loading" id="loading">
-        <v-progress-circular :size="70" :width="7" color="blue" indeterminate></v-progress-circular>
+      <div v-if="loadingUserData" id="loading">
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="blue"
+          indeterminate
+        ></v-progress-circular>
         <h1 id="loading-text">Loading data...</h1>
         <p class="error p-5 white--text rounded my-5">{{ loadingError }}</p>
       </div>
@@ -55,7 +60,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["loading", "randomUser", "loadingError"]),
+    ...mapState(["loadingUserData", "randomUser", "loadingError"]),
   },
   methods: {
     ...mapActions(["getRandomUser"]),

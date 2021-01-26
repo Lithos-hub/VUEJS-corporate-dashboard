@@ -2,18 +2,17 @@ import firebase from 'firebase/app'
 
 import 'firebase/firestore'
 
-var firebaseConfig = {
-  apiKey: "AIzaSyAFFNa0v6vWhZzcJVUGaaJ_iwskxE6dyxY",
-  authDomain: "dashboard-2e624.firebaseapp.com",
-  databaseURL: "https://dashboard-2e624.firebaseio.com",
-  projectId: "dashboard-2e624",
-  storageBucket: "dashboard-2e624.appspot.com",
-  messagingSenderId: "243672370131",
-  appId: "1:243672370131:web:77ba096871c9c94b10fd26"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDEe_7FrD7VxfPXEDvR113woRNrmAr2HiI",
+    authDomain: "dashboard-d3785.firebaseapp.com",
+    projectId: "dashboard-d3785",
+    storageBucket: "dashboard-d3785.appspot.com",
+    messagingSenderId: "809341186806",
+    appId: "1:809341186806:web:5fea53d25bfb78f45ff2d7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
   export {db}

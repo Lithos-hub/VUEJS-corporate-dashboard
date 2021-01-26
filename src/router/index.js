@@ -70,6 +70,12 @@ const routes = [
 
     component: () => import(/* webpackChunkName: "about" */ '../views/Tasks.vue')
   },
+  {
+    path: '/changelog',
+    name: 'Changelog',
+
+    component: () => import(/* webpackChunkName: "about" */ '../views/Changelog.vue')
+  },
 ]
 
 const router = new VueRouter({
