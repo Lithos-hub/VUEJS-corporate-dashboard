@@ -8,6 +8,20 @@ IDash is a corporate / business dashboard app made from scratch without template
 
 By now, there are only some options and features available, but I will develop more changes and fixes with future versions and updates.
 
+Changelog:
+
+Version 1.1.2
+
+* New logo and favicon
+
+Version 1.1.1
+
+* Added some fixes in Tasks section
+
+Version 1.1.0
+
+* Added dynamic modals in Team section
+
 ## Project setup
 ```
 npm install

@@ -126,8 +126,9 @@
 
       <div id="version-count">
         <v-divider></v-divider>
+        <div class="white--text font-weight-bold text-center mt-2">{{year}} - Carlos Segura García</div>
         <p class="pt-5 ml-5 white--text mx-auto">
-          Version: {{ major }}.{{ minor }}.{{patch}}
+          v.{{ major }}.{{ minor }}.{{patch}}
           <a
             href="https://github.com/Lithos-hub/VUEJS-corporate-dashboard"
             style="text-decoration: none"
@@ -158,6 +159,7 @@ export default {
       major: 1,
       minor: 1,
       patch: 2,
+      year: new Date().getFullYear(),
       now: moment(),
       sheet: false,
       tiles: [
