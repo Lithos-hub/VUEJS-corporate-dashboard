@@ -12,17 +12,18 @@ By now, there are only some options and features available, but I will develop m
 
 Changelog:
 
-Version 1.1.2
+Version 1.1.0
 
-* New logo and favicon
+* Added dynamic modals in Team section
+
 
 Version 1.1.1
 
 * Added some fixes in Tasks section
 
-Version 1.1.0
+Version 1.1.2
 
-* Added dynamic modals in Team section
+* New logo and favicon
 
 ## Project setup
 ```
