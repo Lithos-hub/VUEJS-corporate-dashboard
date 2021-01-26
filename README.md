@@ -1,5 +1,7 @@
 # iDash
 
+![logo](https://user-images.githubusercontent.com/57297760/105875859-9a4cfa00-5ffe-11eb-91aa-fb8d8e3fa043.jpg)
+
 IDash is a corporate / business dashboard app made from scratch without templates using the next technologies:
 
 * Vuetify, a Vue UI Library with Material Design Components.
