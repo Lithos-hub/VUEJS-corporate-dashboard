@@ -19,8 +19,13 @@ export default {
   components: {
     Navbar,
   },
-
-  data: () => ({}),
+  async created() {
+    try {
+      await this.$store.dispatch("getRandomUser");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 };
 </script>
 

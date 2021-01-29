@@ -27,6 +27,7 @@ export default {
                 {version: "1.1.0", changes: ["Added dynamic modals in Team section"]},
                 {version: "1.1.1", changes: ["Added some fixes in Tasks section"]},
                 {version: "1.1.2", changes: ["New logo and favicon"]},
+                {version: "1.1.3", changes: ["Aesthetic changes in general", "Random User API improved", "Tasks list now have auto-refresh when the user write a task"]},
             ]
         }
     },

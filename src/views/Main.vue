@@ -11,38 +11,29 @@
       <v-divider></v-divider>
 
       <v-row>
-        <v-col id="left-col">
-          <v-card class="mx-auto my-5" width="100%" color="primary" dark>
+        <v-col lg="6">
+          <v-card color="primary" dark>
             <v-card-title>
-              <v-icon large left> mdi-pencil </v-icon>
+              <v-icon left> mdi-pencil </v-icon>
               <span class="title font-weight-light">You have unfinished business!</span>
             </v-card-title>
-
-            <v-row>
-              <v-list-item>
-                <v-col cols="1">
+            <v-row no-gutters>
+                <v-col cols="1" class="ma-auto">
                   <v-checkbox> </v-checkbox>
                 </v-col>
-                <v-col> Review the documentation for the April 24th meeting. </v-col>
-              </v-list-item>
-              <v-list-item>
-                <v-col cols="1">
+                <v-col lg="11" class="ma-auto"> Review the documentation for the April 24th meeting. </v-col>
+                <v-col cols="1" class="ma-auto">
                   <v-checkbox> </v-checkbox>
                 </v-col>
-                <v-col> Send mail to Kraken IT Solutions and Global Tech. </v-col>
-              </v-list-item>
-              <v-list-item>
-                <v-col cols="1">
+                <v-col lg="11" class="ma-auto"> Send mail to Kraken IT Solutions and Global Tech. </v-col>
+                <v-col cols="1" class="ma-auto">
                   <v-checkbox> </v-checkbox>
                 </v-col>
-                <v-col> Call Jane Smith to postpone Friday's interview. </v-col>
-              </v-list-item>
+                <v-col lg="11" class="ma-auto"> Call Jane Smith to postpone Friday's interview. </v-col>
             </v-row>
-          </v-card>
+              </v-card>
 
-          <div class="py-5"></div>
-
-          <v-card class="mx-auto" width="100%" color="error" dark id="new-hire">
+          <v-card width="100%" color="error" dark id="new-hire" class="mt-2">
             <v-card-title>
               <v-icon large left id="hire-star"> mdi-star </v-icon>
               <span class="title font-weight-light"
@@ -74,21 +65,21 @@
               </v-list-item>
             </v-card-actions>
           </v-card>
+
+
         </v-col>
 
         <!-- RIGHT CALENDAR ******************************** -->
 
-        <v-col id="right-col">
-          <v-sheet width="100%" height="100%" elevation="15" class="pa-5">
+        <v-col id="right-col" lg="6">
+          <v-card elevation="15">
             <v-row class="fill-height">
               <v-col>
                 <v-sheet
-                  height="64"
                   width="100%"
                   color="teal"
-                  class="text-center pa-5 mb-5"
+                  class="text-center"
                   dark
-                  rounded
                 >
                   <v-toolbar-title v-if="$refs.calendar">
                     {{ new Date() | moment("MMMM YYYY") }}
@@ -110,7 +101,7 @@
                 </v-sheet>
               </v-col>
             </v-row>
-          </v-sheet>
+          </v-card>
         </v-col>
       </v-row>
     </v-sheet>
@@ -119,8 +110,6 @@
 
 <script>
 import SectionBar from "../components/SectionBar";
-
-import * as moment from "moment/moment";
 
 import { mapActions, mapState } from "vuex";
 
@@ -144,7 +133,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loading", "randomUser", "loadingError"]),
+    ...mapState(["loadingUserData", "randomUser", "loadingError"]),
   },
   methods: {
     ...mapActions(["getRandomUser"]),
@@ -205,13 +194,6 @@ export default {
       return Math.floor((b - a + 1) * Math.random()) + a;
     },
   },
-  async created() {
-    try {
-      await this.$store.dispatch("getRandomUser");
-    } catch (error) {
-      console.error(error);
-    }
-  },
   mounted() {
     this.$refs.calendar.checkChange();
   },
@@ -226,12 +208,6 @@ export default {
 }
 // ******* LAPTOP RESPONSIVE ******* //
 @media only screen and (min-width: 767px) {
-  #left-col {
-    width: 100%;
-  }
-  #right-col {
-    max-width: 800px;
-  }
   #new-hire {
     position: relative;
     top: 0px;
@@ -257,15 +233,8 @@ export default {
 
 // ******* DESKTOP RESPONSIVE ******* //
 @media only screen and (min-width: 1370px) {
-  #left-col {
-    width: 100%;
-  }
-  #right-col {
-    max-width: 600px;
-  }
   #new-hire {
     position: relative;
-    top: 140px;
   }
 
   #hello-user {

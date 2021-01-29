@@ -8,10 +8,10 @@
     <!----------------- -->
 
     <v-card class="overflow-hidden">
-      <v-app-bar rounded elevation="10" dark>
+      <v-app-bar rounded elevation="10" dark height="10">
         <br />
         <template v-slot:extension>
-          <v-tabs align-with-title>
+          <v-tabs centered>
             <v-tab @click="goSummary()">Summary</v-tab>
             <v-tab @click="goProfile()">My Profile</v-tab>
             <v-tab @click="goSecurity()">Password & Security</v-tab>
@@ -33,7 +33,6 @@
 
 <script>
 import SectionBar from "../components/SectionBar";
-
 import MyProfile from "../components/MyProfile";
 import Summary from "../components/Summary";
 import Security from "../components/Security";

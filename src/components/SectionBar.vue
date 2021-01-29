@@ -9,6 +9,7 @@
           elevation="10"
           class="rounded"
           id="sectionBar"
+          height="40"
         >
           <v-toolbar-title id="sectionTitle">{{ sectionName }}</v-toolbar-title>
         </v-toolbar>
@@ -36,31 +37,30 @@ export default {
     position: absolute;
     top: 0px;
     font-family: $style1 !important;
-    font-size: 3em !important;
-    text-shadow: none;
+    font-size: 1.8em !important;
+    text-shadow: 0px 0px 10px black;
     text-transform: uppercase;
   }
   #sectionBar {
     position: relative;
     height: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 }
-
 // ******* DESKTOP RESPONSIVE ******* //
 @media only screen and (min-width: 1370px) {
   #sectionTitle {
     position: absolute;
     top: 0px;
     font-family: $style1 !important;
-    font-size: 3em !important;
-    text-shadow: none;
+    font-size: 1.8em !important;
+    text-shadow: 0px 0px 10px black;
     text-transform: uppercase;
   }
   #sectionBar {
     position: relative;
     height: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 }
 </style>

@@ -25,6 +25,12 @@ Version 1.1.2
 
 * New logo and favicon
 
+Version 1.1.3
+
+* Aesthetic changes in general
+* Random User API improved
+* Tasks list now have auto-refresh when the user write a task
+
 ## Project setup
 ```
 npm install

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <!-- <div class="container">
       <div v-if="loadingUserData" id="loading">
         <v-progress-circular
           :size="70"
@@ -11,9 +11,9 @@
         <h1 id="loading-text">Loading data...</h1>
         <p class="error p-5 white--text rounded my-5">{{ loadingError }}</p>
       </div>
-    </div>
+    </div> -->
 
-    <v-container height="100%" width="100%" v-if="!loading">
+    <v-container height="100%" width="100%">
       <div id="accountContent">
         <h3 class="display-1" id="accounth3">Account summary</h3>
         <hr class="light-blue lighten-4 my-2" />
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "Summary",
@@ -61,16 +61,6 @@ export default {
   },
   computed: {
     ...mapState(["loadingUserData", "randomUser", "loadingError"]),
-  },
-  methods: {
-    ...mapActions(["getRandomUser"]),
-  },
-  async created() {
-    try {
-      await this.$store.dispatch("getRandomUser");
-    } catch (error) {
-      console.error(error);
-    }
   },
 };
 </script>

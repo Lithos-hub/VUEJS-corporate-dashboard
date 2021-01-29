@@ -43,7 +43,7 @@
                 class="mt-5 white--text"
                 color="black"
                 type="submit"
-                @click="addDialog = !addDialog"
+                @click="addDialog = !addDialog; getTasks()"
                 >Add task</v-btn
               >
             </v-card-actions>
@@ -95,7 +95,7 @@
 
             <!-- EDIT DIALOG -->
             <v-dialog v-model="editdialog" max-width="800">
-              <v-card>
+              <v-card v-show="editdialog">
                 <v-card-title class="headline orange white--text"
                   >Edit task
                 </v-card-title>
@@ -131,8 +131,7 @@
                       type="submit"
                       id="saveBtn"
                       :disabled="$v.task.$invalid"
-                      @v-on:click="editdialog = false"
-                      @click="editTask"
+                      @v-on:click="editdialog = false; getTasks()"
                       >Save changes</v-btn
                     >
                   </v-card-actions>
@@ -204,7 +203,7 @@ export default {
     ...mapState(["tasks", "loadingFirebase", "task", "addDialog"]),
     ...mapGetters(["filteredArray"]),
   },
-  created() {
+  mounted() {
     this.getTasks();
     this.getTask(this.id);
   },

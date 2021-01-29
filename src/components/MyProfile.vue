@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "ChangeImage",
@@ -63,17 +63,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["loading", "randomUser", "loadingError"]),
-  },
-  methods: {
-    ...mapActions(["getRandomUser"]),
-  },
-  async created() {
-    try {
-      await this.$store.dispatch("getRandomUser");
-    } catch (error) {
-      console.error(error);
-    }
+    ...mapState(["loadingUserData", "randomUser", "loadingError"]),
   },
 };
 </script>

@@ -15,7 +15,7 @@
             permanent
           >
             <v-list>
-              <v-list-item v-for="([icon, text], i) in items" :key="i" link>
+              <v-list-item v-for="([icon, text], i) in items" :key="'A' + i" link>
                 <v-list-item-icon>
                   <v-icon>{{ icon }}</v-icon>
                 </v-list-item-icon>
@@ -55,14 +55,14 @@
             <v-container>
               <v-layout id="main-contain">
                 <v-row>
-                  <v-list-item v-for="(item, index) in items" :key="index" link>
+                  <v-list-item v-for="(item, i) in items" :key="'B' + i" link>
                     <v-col cols="1">
                       <v-checkbox> </v-checkbox>
                     </v-col>
                     <v-col> From </v-col>
                     <v-col cols="7"> Email subject </v-col>
                   </v-list-item>
-                  <v-list-item v-for="(item, index) in items" :key="index">
+                  <v-list-item v-for="(item, i) in items" :key="'C' + i">
                     <v-col cols="1">
                       <v-checkbox> </v-checkbox>
                     </v-col>
@@ -113,7 +113,7 @@ export default {
 // ******* LAPTOP RESPONSIVE ******* //
 @media only screen and (min-width: 767px) {
   #left-col {
-    max-width: 300px !important;
+    max-width: 250px !important;
   }
 
   #right-col {

@@ -2,7 +2,7 @@
   <div>
     <!-- // SUPERIOR NAVBAR // -->
 
-    <v-app-bar app dark src="../assets/img/navbar.jpg" id="navbar">
+    <v-app-bar height="40" color="#0085CF" dark app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center">
         <v-toolbar-title>iDash</v-toolbar-title>
@@ -10,21 +10,21 @@
 
       <v-spacer></v-spacer>
 
-      <div class="lead">{{ randomUser.name.first }} {{ randomUser.name.last }}</div>
+      <div>{{ randomUser.name.first }} {{ randomUser.name.last }}</div>
 
       <v-spacer></v-spacer>
 
-      <span id="clock" class="mr-5 cyan--text">{{
+      <span id="clock" class="mr-5">{{
         new Date() | moment("D/M/YYYY")
       }}</span>
-      <span id="clock" class="mr-5 white--text">{{ this.now.format("HH:mm:ss") }}</span>
+      <span id="clock">{{ this.now.format("HH:mm:ss") }}</span>
 
       <!-- // NOTIFICATIONS DIALOG // -->
 
-      <div class="text-center">
+      <div>
         <v-bottom-sheet v-model="sheet">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn depressed color="dark" class="mr-5" v-bind="attrs" v-on="on">
+            <v-btn depressed color="transparent" v-bind="attrs" v-on="on">
               <v-badge dot overlap color="red">
                 <v-icon>mdi-bell</v-icon>
               </v-badge>
@@ -35,7 +35,7 @@
             >Notifications</v-subheader
           >
 
-          <v-list three-line>
+          <v-list>
             <template v-for="(item, index) in itemsDialog">
               <v-subheader
                 v-if="item.header"
@@ -55,8 +55,8 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title v-html="item.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                  <v-list-item-title v-html="item.title" class="notification-dialog"></v-list-item-title>
+                  <v-list-item-subtitle v-html="item.subtitle" class="notification-dialog"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </template>
@@ -66,23 +66,21 @@
 
       <!-- // END NOTIFICATION DIALOG // -->
 
-      <v-btn color="dark" to="/" class="mr-5">
+      <v-btn depressed color="transparent" to="/" >
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn outlined depressed color="green" to="/about" text class="mr-5">
-        <span class="mr-2">About</span>
+      <v-btn color="transparent" to="/about" depressed>
         <v-icon>mdi-information-variant</v-icon>
       </v-btn>
-      <v-btn outlined depressed color="error" target="_blank" text>
-        <span class="mr-2">Sign Out</span>
+      <v-btn color="transparent" target="_blank" depressed>
         <v-icon>mdi-account-cancel</v-icon>
       </v-btn>
     </v-app-bar>
 
     <!-- // END SUPERIOR NAVBAR // -->
 
-    <v-navigation-drawer v-model="drawer" dark src="../assets/img/sidebar.jpg" app>
+    <v-navigation-drawer v-model="drawer" dark app color="#0085CF">
       <v-layout column align-center class="mt-5">
         <v-flex>
           <v-avatar height="100px" width="100px" id="avatar">
@@ -91,10 +89,10 @@
         </v-flex>
 
         <v-flex>
-          <h3 class="cyan--text mt-5 text-center" id="user-nick">
+          <h3 class="mt-5 text-center" id="user-nick">
             @{{ randomUser.name.first }}_{{ randomUser.name.last }}
           </h3>
-          <v-list-item to="/account" active-class="cyan--text">
+          <v-list-item to="/account" active-class="white--text" class="my-2">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -112,13 +110,15 @@
         link
         :to="item.to"
         active-class="white--text"
+        dense
+        
       >
         <v-list-item-icon>
-          <v-icon id="side-icon">{{ item.icon }}</v-icon>
+          <v-icon id="side-icon" class="ma-auto">{{ item.icon }}</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-list-item-title id="side-text">{{ item.text }}</v-list-item-title>
+          <v-list-item-title id="side-text" class="ma-auto">{{ item.text }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -126,7 +126,7 @@
 
       <div id="version-count">
         <v-divider></v-divider>
-        <div class="white--text font-weight-bold text-center mt-2">{{year}} - Carlos Segura García</div>
+        <div class="text-center mt-2">{{year}} <br> Carlos Segura García</div>
         <p class="pt-5 ml-5 white--text mx-auto">
           v.{{ major }}.{{ minor }}.{{patch}}
           <a
@@ -139,7 +139,7 @@
           </a>
         </p>
         <router-link to="/changelog" style="text-decoration: none;">
-        <v-btn width="100%" tile color="red darken-2">Changelog</v-btn>
+        <v-btn width="100%" tile color="secondary darken-2">Changelog</v-btn>
         </router-link>
       </div>
     </v-navigation-drawer>
@@ -149,16 +149,15 @@
 <script>
 import * as moment from "moment/moment";
 
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
-
   data() {
     return {
       major: 1,
       minor: 1,
-      patch: 2,
+      patch: 3,
       year: new Date().getFullYear(),
       now: moment(),
       sheet: false,
@@ -267,29 +266,25 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loading", "randomUser"]),
-  },
-  methods: {
-    ...mapActions(["getRandomUser"]),
+    ...mapState(["loadingUserData", "randomUser"]),
   },
   mounted() {
     setInterval(() => {
       this.now = moment();
     }, 1000);
   },
-  async created() {
-    try {
-      await this.$store.dispatch("getRandomUser");
-      console.log("NAVBAR");
-      console.log(randomUser);
-    } catch (error) {
-      console.error(error);
-    }
-  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import 'src/scss/variables';
+
+* {
+  font-weight: lighter;
+  font-family: $style5;
+  letter-spacing: 2px;
+}
+
 body {
   background-color: transparent;
 }
@@ -300,51 +295,80 @@ body {
 // ******* LAPTOP RESPONSIVE ******* //
 @media only screen and (min-width: 767px) {
   #avatar {
-    width: 90% !important;
-    height: 90% !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   #user-nick {
-    font-size: 15px;
+    font-size: 12px;
+    letter-spacing: 0px;
+    font-family: $style4;
+    font-weight: bold;
+    color: $secondary;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
   }
-
   #version-count {
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    font-weight: 100;
-  }
-  #side-icon {
-    font-size: 15px;
-  }
-  #side-text {
+    letter-spacing: 0px;
+    color: white;
     font-size: 12px;
   }
+  #side-icon {
+    font-size: 18px;
+  }
+  #side-text {
+    font-size: 13px;
+  }
+
+  .notification-dialog {
+    font-family: $style2 !important;
+    letter-spacing: 0px;
+  }
 }
+
 
 // ******* DESKTOP RESPONSIVE ******* //
 @media only screen and (min-width: 1370px) {
   #avatar {
-    width: 120% !important;
-    height: 120% !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   #user-nick {
-    font-size: 20px;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-family: $style4;
+    font-weight: bold;
+    color: $secondary;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
   }
   #version-count {
     position: absolute;
     bottom: 0px;
     left: 0px;
     width: 100%;
-    font-weight: 100;
+    letter-spacing: 0px;
+    color: white;
+    font-size: 15px;
   }
   #side-icon {
     font-size: 20px;
   }
   #side-text {
-    font-size: 20px;
+    font-size: 15px;
+  }
+
+  .notification-dialog {
+    font-family: $style2 !important;
+    letter-spacing: 0px;
   }
 }
+
 </style>
